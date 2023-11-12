@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista de Medicos</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre del Paciente</th>
+          <th scope="col">Especialidad</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Email</th>
+          <th scope="col">Fecha de Nacimiento</th>
+          <th scope="col">Género</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Fecha de Registro</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>  {# Agrega una columna para acciones #}
+        </tr>
+      </thead>
+      <tbody>
+        {% for medico in medicos %}
+          <tr>
+            <th scope="row">{{ medico.id }}</th>
+            <td>{{ medico.nombre_medico }}</td>
+            <td>{{ medico.especialidad }}</td>
+            <td>{{ medico.telefono }}</td>
+            <td>{{ medico.email }}</td>
+            <td>{{ medico.fecha_nacimiento }}</td>
+            <td>{{ medico.genero }}</td>
+            <td>{{ medico.direccion }}</td>
+            <td>{{ medico.fecha_registro }}</td>
+            <td>{{ medico.estado }}</td>
+            
+            <td>
+              <a href="{% url 'editar_medico' medico.id %}">Editar</a> |  {# Enlace para editar #}
+              <a href="{% url 'eliminar_medico' medico.id %}">Eliminar</a>  {# Enlace para eliminar #}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

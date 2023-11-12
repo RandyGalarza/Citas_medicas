@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Reservar Cita Médica</h1>
+                        <form action="{% url 'reserva' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="paciente">Selecciona un paciente:</label>
+                                <select id="paciente" name="paciente" class="form-control" required>
+                                    <option value="">Selecciona un paciente</option>
+                                    {% for paciente in pacientes %}
+                                        <option value="{{ paciente.id }}">{{ paciente.nombre_paciente }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tipo_cita">Tipo de Cita:</label>
+                                <select id="tipo_cita" name="tipo_cita" class="form-control" required>
+                                    <option value="">Seleccione el tipo de cita</option>
+                                    <option value="Examen">Examen Médico</option>
+                                    <option value="Consulta">Consulta General</option>
+                                    <option value="Especialista">Consulta Especialista</option>
+                                    <!-- Agrega más opciones según tus necesidades -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_cita">Fecha de Cita:</label>
+                                <input type="date" id="fecha_cita" name="fecha_cita" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="hora_cita">Hora de Cita:</label>
+                                <input type="time" id="hora_cita" name="hora_cita" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="estado">Estado:</label>
+                                <input type="number" id="estado" name="estado" class="form-control" placeholder="1" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Reservar Cita</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

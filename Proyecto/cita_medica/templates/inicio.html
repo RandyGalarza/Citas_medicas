@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="image-slider">
+    <button class="prev-button" onclick="changeImage(-1)">&lt;</button>
+    <div class="image">
+        <img src="{% static 'img/1.png' %}" alt="Image 1">
+    </div>
+    <div class="image">
+        <img src="{% static 'img/2.jpg' %}" alt="Image 2">
+    </div>
+    <div class="image">
+        <img src="{% static 'img/3.jpg' %}" alt="Image 3">
+    </div>
+    <div class="image">
+        <img src="{% static 'img/4.png' %}" alt="Image 4">
+    </div>
+    <div class="image">
+        <img src="{% static 'img/5.jpg' %}" alt="Image 5">
+    </div>
+    <div class="image">
+        <img src="{% static 'img/6.jpeg' %}" alt="Image 6">
+    </div>
+    <div class="image-text">
+        <p>¡Bienvenido a nuestro sistema de reserva de citas médicas! Con nuestra plataforma, puedes programar fácilmente tus citas con los médicos de tu elección de manera rápida y conveniente. Continúa explorando para descubrir cómo podemos ayudarte a cuidar de tu salud.</p>
+    </div>
+    <button class="next-button" onclick="changeImage(1)">&gt;</button>
+</div>
+<div class="content">
+    <h2>Servicios Destacados</h2>
+    <p>Descubre nuestros servicios médicos especializados.</p>
+    <!-- Agregar contenido adicional aquí -->
+</div>
+<div class="credits">
+    <p>&copy; 2023 Proyecto de clase. Todos los derechos reservados.</p>
+    <div class="social-links">
+        <a href="https://www.facebook.com/randydavid.vanegas/" class="social-link" target="_blank">Facebook</a>
+        <a href="https://twitter.com/MakotoLife1" class="social-link" target="_blank">Twitter</a>
+    </div>
+</div>
+<style>
+    .credits {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff; 
+    z-index: 1000;
+    padding: 10px; 
+    text-align: center;
+}
+
+.social-links {
+    margin-top: 10px; 
+}
+
+.social-link {
+    margin: 0 10px; 
+    text-decoration: none;
+    color: #007BFF; 
+}
+    .image-slider {
+        text-align: center;
+        position: relative;
+    }
+
+    .image {
+        display: none;
+    }
+
+    .image img {
+        width: 30%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .prev-button,
+    .next-button {
+        font-size: 24px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .prev-button {
+        left: 10px;
+    }
+
+    .next-button {
+        right: 10px;
+    }
+</style>
+
+
+
+<script>
+    let currentImageIndex = 0;
+    const images = document.querySelectorAll('.image');
+
+    function showImage(index) {
+        images.forEach((image, i) => {
+            if (i === index) {
+                image.style.display = 'block';
+            } else {
+                image.style.display = 'none';
+            }
+        });
+    }
+
+    function changeImage(offset) {
+        currentImageIndex = (currentImageIndex + offset + images.length) % images.length;
+        showImage(currentImageIndex);
+    }
+    // Funcion para cambiar automáticamente de imagen cada 10 segundos
+    function autoChangeImage() {
+        changeImage(1); 
+        setTimeout(autoChangeImage, 10000); 
+    }
+
+    showImage(currentImageIndex);
+    autoChangeImage();
+</script>
+
+
+{% endblock %}

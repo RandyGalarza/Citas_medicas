@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Reservas de Cita</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre del Paciente</th>
+                <th scope="col">Fecha de Cita</th>
+                <th scope="col">Hora de Cita</th>
+                <th scope="col">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in citas %}
+                <tr>
+                    <th scope="row">{{ reserva.id }}</th>
+                    <td>{{ reserva.nombre_paciente }}</td>
+                    <td>{{ reserva.tipo_cita }}</td>
+                    <td>{{ reserva.fecha_cita }}</td>
+                    <td>{{ reserva.hora_cita|time:"H:i" }}</td>  {# Formatea la hora en HH:MM #}
+                    <td>{{ reserva.estado }}</td>                
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

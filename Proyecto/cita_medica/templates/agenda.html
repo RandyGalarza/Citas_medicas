@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .tipo-cita-examen {
+        background-color: #FF5733;  /* Color para tipo de cita "Examen" */
+    }
+
+    .tipo-cita-consulta {
+        background-color: #33FF57;  /* Color para tipo de cita "Consulta" */
+    }
+
+    .tipo-cita-especialista {
+        background-color: #ffe033;  /* Color para tipo de cita "Especialista" */
+    }
+     /* Estilos para el calendario */
+     #calendar {
+        font-family: Arial, sans-serif;
+        border: 1px solid #ccc;
+        background-color: #f5f5f5;
+    }
+
+    .fc-day-header {
+        background-color: #337ab7;
+        color: #fff;
+    }
+
+    .fc-event {
+        background-color: #337ab7;
+        border: 1px solid #2e6da4;
+        color: #fff;
+    }
+
+    .fc-event:hover {
+        background-color: #286090;
+        border: 1px solid #204d74;
+    }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.js"></script>
+
+<div id="calendar"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {        
+            initialView: 'dayGridMonth', 
+            selectable: true, 
+            events: '{% url "get_eventos" %}',  // URL de la vista que obtiene los eventos
+        });
+        calendar.render();
+    });
+</script>
+{% endblock %}

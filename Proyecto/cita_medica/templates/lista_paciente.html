@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista de Pacientes</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre del Paciente</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Email</th>
+          <th scope="col">Fecha de Nacimiento</th>
+          <th scope="col">Género</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Fecha de Registro</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>  {# Agrega una columna para acciones #}
+        </tr>
+      </thead>
+      <tbody>
+        {% for paciente in paciente %}
+          <tr>
+            <th scope="row">{{ paciente.id }}</th>
+            <td>{{ paciente.nombre_paciente }}</td>
+            <td>{{ paciente.telefono }}</td>
+            <td>{{ paciente.email }}</td>
+            <td>{{ paciente.fecha_nacimiento }}</td>
+            <td>{{ paciente.genero }}</td>
+            <td>{{ paciente.direccion }}</td>
+            <td>{{ paciente.fecha_registro }}</td>
+            <td>{{ paciente.estado }}</td>
+            
+            <td>
+              <a href="{% url 'editar_paciente' paciente.id %}">Editar</a> |  {# Enlace para editar #}
+              <a href="{% url 'eliminar_paciente' paciente.id %}">Eliminar</a>  {# Enlace para eliminar #}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

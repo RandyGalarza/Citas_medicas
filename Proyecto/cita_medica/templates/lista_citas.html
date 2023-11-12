@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista de Citas Médicas</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre del Paciente</th>
+          <th scope="col">Tipo de Cita</th>
+          <th scope="col">Fecha de Cita</th>
+          <th scope="col">Hora de Cita</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>  {# Agrega una columna para acciones #}
+        </tr>
+      </thead>
+      <tbody>
+        {% for reserva in citas %}
+          <tr>
+            <th scope="row">{{ reserva.id }}</th>
+            <td>{{ reserva.nombre_paciente }}</td>
+            <td>{{ reserva.tipo_cita }}</td>
+            <td>{{ reserva.fecha_cita }}</td>
+            <td>{{ reserva.hora_cita|time:"H:i" }}</td>  {# Formatea la hora en HH:MM #}
+            <td>{{ reserva.estado }}</td>
+            
+            <td>
+              <a href="{% url 'editar_cita' reserva.id %}">Editar</a> |  {# Enlace para editar #}
+              <a href="{% url 'eliminar_cita' reserva.id %}">Eliminar</a>  {# Enlace para eliminar #}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
